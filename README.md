@@ -55,7 +55,7 @@ The script consists of two key stages connected by a **pipeline** (`|`).
 
 The first part of the script is responsible for finding and extracting the necessary data.
 
-* The `find` command locates all files with the `.mp4` extension in the current directory and all its subfolders. The `-print0` option makes the output safe, allowing the script to handle file names that contain spaces or special characters correctly. 
+* The `find` command locates all files with the `.mp4` extension in the current directory and all its subfolders. The `-print0` option — if filenames contain spaces or special characters, this option adds an invisible null character (`\0`) to the end of each filename. This makes the separated filename a single entity, as if the space never existed. 
 * Next, the output of the `find` command is passed to a `while read` loop. This loop processes each found file line by line.
 * For each file, the `ffprobe` utility extracts its duration in seconds.
 * Finally, the folder path and the duration of each file are printed on a single line.
@@ -127,7 +127,7 @@ END {
 
 Первая часть скрипта отвечает за поиск и извлечение необходимых данных.
 
-* Команда `find` находит все файлы с расширением `.mp4` в текущей директории и всех её подпапках. Опция `-print0` делает результат безопасным, позволяя скрипту корректно работать даже с именами файлов, содержащими пробелы или специальные символы. 
+* Команда `find` находит все файлы с расширением `.mp4` в текущей директории и всех её подпапках. Опция `-print0` - если имена файлов, содержат пробелы или специальные символы, то эта опция добавит в конце имени каждого файла невидимый нулевой символ (`\0`). Сделав это разделённое имя файла единым целым, как если бы этого пробела небыло вообще. 
 * Далее, вывод команды `find` передаётся в цикл `while read`. Этот цикл построчно обрабатывает каждый найденный файл.
 * Для каждого файла утилита `ffprobe` извлекает его продолжительность в секундах.
 * Наконец, путь к папке и продолжительность каждого файла выводятся на одной строке.
